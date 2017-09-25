@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import *
+
 from django.shortcuts import render
 
-def index(request):
-    pass
+
+def landing(request):
+    return render(request, 'landing.html', context={})

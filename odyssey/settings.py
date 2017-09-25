@@ -32,7 +32,9 @@ AUTH_PROFILE_MODULE = 'treasure.UserProfile'
 # Application definition
 
 INSTALLED_APPS = [
-    'treasure',
+    'leaderboard.apps.LeaderboardConfig',
+    'landing.apps.LandingConfig',
+    'treasure.apps.TreasureConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
