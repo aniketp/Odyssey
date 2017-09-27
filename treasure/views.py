@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 success_message = 'Correct Answer !! Next Question is unlocked.'
 failure_message = 'Sorry, Try again..'
-invalid_form = 'Please Enter Your Answer.'
+already_solved = "You've already solved it"
 
 
 def index(request):
@@ -29,17 +29,24 @@ def questions(request, pk):
         form = QuestionForm(request.POST)
         if form.is_valid():
             answer = form.cleaned_data['answer']
+            solvers = question.solved_by.all()
 
             if answer.lower() == question.correct_answer:
-                message = success_message
-                wing.solved += 1
-                wing.save()
+                if request.user not in solvers:
+                    message = success_message
+                    question.solved_by.add(request.user)
+                    question.save()
+
+                    wing.solved += 1
+                    wing.score += question.points
+                    wing.save()
+                else:
+                    message = already_solved
 
             else:
                 message = failure_message
 
         else:
-            message = invalid_form
 
             return render(request, 'question.html', context={'question': question, 'message': message})
 

@@ -6,13 +6,12 @@ from .models import *
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('mascot', 'wing_name', 'score', 'rank')
+    list_display = ('mascot', 'wing_name', 'score', 'rank', 'solved')
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'correct_answer')
+    list_display = ('name', 'correct_answer', 'url', )
 
 
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Answer)
