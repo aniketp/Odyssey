@@ -10,7 +10,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('serial', 'name', 'correct_answer')
+    list_display = ('name', 'correct_answer')
 
 
 admin.site.register(UserProfile, UserProfileAdmin)

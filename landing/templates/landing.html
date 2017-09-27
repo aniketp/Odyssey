@@ -1,19 +1,40 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    <div>
-        <ul>
-            <li>Home</li>
-            <li>Leaderboard</li>
-            <li>Treasure-Hunt</li>
-        </ul>
+{% block navbar %}
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="{% url 'landing' %}"><span style="font-weight: 100px">ODYSSEY</span></a>
     </div>
 
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'landing' %}">Home</a></li>
+            <li><a href="{% url 'odyssey' %}">Treasurehunt</a></li>
+        {% endif %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
 
-    {% if user.is_authenticated %}
-     <li>User: {{ user.get_username }}</li>
-     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-   {% else %}
-     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
-   {% endif %}
+
+{% block content %}
+    <div>
+        <h1 style="text-align: center">Welcome to Odyssey</h1>
+    </div>
 {% endblock %}

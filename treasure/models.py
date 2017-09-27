@@ -5,11 +5,19 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+class Answer(models.Model):
+    correct_answer = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.correct_answer
+
+
 class Question(models.Model):
     serial = models.IntegerField(null=False, unique=True)
+    url = models.IntegerField(max_length=4, null=True)
     name = models.CharField(max_length=30, null=False, blank=False)
     text = models.TextField(max_length=20000, null=True, blank=True)
-    correct_answer = models.CharField(max_length=100, null=True, blank=True)
+    correct_answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -21,13 +29,8 @@ class UserProfile(models.Model):
     mascot = models.CharField(max_length=30, unique=True)
     score = models.IntegerField(default=0)
     rank = models.IntegerField()
+    solved = models.IntegerField(default=0)
 
     def __str__(self):
         return self.mascot
 
-
-class Answer(models.Model):
-    correct_answer = models.ForeignKey(Question, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.correct_answer
