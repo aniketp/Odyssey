@@ -1,20 +1,41 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 {% block content %}
 
-    <div>
-        <h2>{{ question.name }}</h2>
-        <h4>{{ question.text }}</h4>
-    </div>
+    <div class="container">
+        <div class="jumbotron" style="padding: 0.4em 0 1em 0">
+            <h2 style="text-align: center">{{ question.name }}</h2>
+        </div>
 
-    <div>
-        <form action="" method="post">
-             {% csrf_token %}
-             <p>{{ form }}</p>
-             <input class="btn btn-success" type="submit" value="submit" />
-        </form>
-    </div>
+        <div class="well">
+            <h4 style="text-align: center">{{ question.text }}</h4>
+        </div>
 
-    {{ message }}
+        <div>
+            <form action="" method="post">
+                 {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-sm-1">
+                        <h4>Answer: </h4>
+                    </div>
+                    <div class="col-sm-11">
+                        {{ form|bootstrap_inline }}
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-success" type="submit" value="submit" />
+                </div>
+            </form>
+
+            {% if message %}
+                <div class="well-small">
+                    <p>{{ message }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}
