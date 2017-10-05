@@ -37,7 +37,7 @@ class UserProfile(models.Model):
     wing_name = models.CharField(max_length=20, unique=True)
     mascot = models.CharField(max_length=30, unique=True)
     score = models.IntegerField(default=0)
-    rank = models.IntegerField()
+    rank = models.IntegerField(null=True, blank=True)
     solved = models.IntegerField(default=0)
 
     def __str__(self):
