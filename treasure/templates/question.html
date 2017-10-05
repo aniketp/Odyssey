@@ -10,7 +10,12 @@
 
         <div class="well">
             <h4 style="text-align: center">{{ question.text }}</h4>
+
+        {% if question.image %}
+            <a href="{{ question.image_url }}">Click here to download the question file</a>
+        {% endif %}
         </div>
+
 
         <div>
             <form action="" method="post">
