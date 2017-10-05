@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 
 success_message = 'Correct Answer !! Next Question is unlocked.'
+bonus_success_message = 'Correct Answer !!'
 failure_message = 'Sorry, Try again..'
 already_solved = "You've already solved it"
 
@@ -18,7 +19,9 @@ def index(request):
     s = questions_solved + 1
     unlocked_questions = all_questions[:s]
 
-    return render(request, 'index.html', context={'questions': unlocked_questions})
+    bonus = BonusQuestion.objects.filter(released=True)
+
+    return render(request, 'index.html', context={'questions': unlocked_questions, 'bonus': bonus})
 
 
 @login_required
@@ -55,3 +58,37 @@ def questions(request, pk):
 
     return render(request, 'question.html', context={'question': question, 'message': message, 'form': form})
 
+
+@login_required
+def bonus_questions(request, pk):
+    question = BonusQuestion.objects.get(url=pk)
+    wing = UserProfile.objects.get(user=request.user)
+    message = None
+    form = QuestionForm()
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            answer = form.cleaned_data['answer']
+            solvers = question.solved_by.all()
+
+            if answer.lower() == question.correct_answer:
+                if request.user not in solvers:
+                    message = bonus_success_message
+                    question.solved_by.add(request.user)
+                    question.save()
+
+                    wing.solved += 1
+                    wing.score += question.points
+                    wing.save()
+                else:
+                    message = already_solved
+
+            else:
+                message = failure_message
+
+        else:
+
+            return render(request, 'question.html', context={'question': question, 'message': message})
+
+    return render(request, 'question.html', context={'question': question, 'message': message, 'form': form})

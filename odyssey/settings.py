@@ -23,15 +23,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '+#6x0m%(re#mgiuw!5bc9sz1bwi#61xr(%7$f)=u%*vqx$_5=y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['odysseyiitk.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['odysseyiitk.pythonanywhere.com',
+                 '127.0.0.1',
+                 'localhost'
+                 ]
 
 AUTH_PROFILE_MODULE = 'treasure.UserProfile'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrapform',
     'leaderboard.apps.LeaderboardConfig',
     'landing.apps.LandingConfig',
     'treasure.apps.TreasureConfig',
@@ -41,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrapform',
 ]
 
 MIDDLEWARE = [
