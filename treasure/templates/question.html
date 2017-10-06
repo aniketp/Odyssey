@@ -8,9 +8,9 @@
             <h2 style="text-align: center">{{ question.name }}</h2>
         </div>
 
-        <div class="well">
+        <div class="well text-center">
 
-            <h4 style="text-align: center">{{ question.text|linebreaks }}</h4>
+            <p>{{ question.text|linebreaks }}</p>
 
         {% if question.image %}
             <a href="{{ question.image_url }}">Click here to download the question file</a>
