@@ -17,6 +17,11 @@ class BonusQuestionAdmin(admin.ModelAdmin):
     list_display = ('name', 'correct_answer', 'url', 'released')
 
 
+class BasuQuestionAdmin(admin.ModelAdmin):
+    list_display = ('name', 'correct_answer', 'url', 'released')
+
+
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(BonusQuestion, BonusQuestionAdmin)
+admin.site.register(BasuQuestion, BasuQuestionAdmin)

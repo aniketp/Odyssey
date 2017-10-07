@@ -38,6 +38,23 @@ class BonusQuestion(models.Model):
         return self.name
 
 
+class BasuQuestion(models.Model):
+    serial = models.IntegerField(null=False, unique=True)
+    url = models.IntegerField(null=True)
+    name = models.CharField(max_length=30, null=False, blank=False)
+    image = models.BooleanField(default=False)
+    image_url = models.CharField(max_length=200, null=True, blank=True)
+    text = models.TextField(max_length=20000, null=True, blank=True)
+    desc = models.TextField(max_length=100, null=True, blank=True)
+    points = models.IntegerField(null=True, default=0)
+    correct_answer = models.CharField(max_length=100, null=True, blank=True)
+    solved_by = models.ManyToManyField(User, related_name='basu_wings', symmetrical=False, blank=True)
+    released = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     wing_name = models.CharField(max_length=20, unique=True)

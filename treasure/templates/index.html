@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-body text-center">
+                <p>Wing: {{ wing.wing_name }}</p>
+                <p>Solved: {{ wing.solved }}</p>
+                <p>Points: {{ wing.score }}</p>
+            </div>
+        </div>
+    </div>
+
     <div>
         <h3 style="text-align: center">Questions</h3>
     </div>
@@ -9,7 +19,7 @@
         <div class="container col-lg-6">
             {% for question in questions %}
                 <a href="{% url 'questions' question.url %}" style="text-decoration: none">
-                    <div class="panel panel-default">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ question.name }}</h3>
                         </div>
@@ -26,7 +36,20 @@
         <div class="container col-lg-6">
             {% for question in bonus %}
                 <a href="{% url 'bonus-questions' question.url %}" style="text-decoration: none">
-                    <div class="panel panel-default">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ question.name }}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ question.desc }}</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+
+            {% for question in basu %}
+                <a href="{% url 'basu-questions1_2' question.url %}" style="text-decoration: none">
+                    <div class="panel panel-success">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ question.name }}</h3>
                         </div>
