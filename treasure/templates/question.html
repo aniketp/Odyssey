@@ -13,7 +13,7 @@
             <p>{{ question.text|linebreaks }}</p>
 
         {% if question.image %}
-            <a href="{{ question.image_url }}">Click here to download the question file</a>
+            <a target="_blank" href="{{ question.image_url }}">Click here to download the question file</a>
         {% endif %}
         </div>
 

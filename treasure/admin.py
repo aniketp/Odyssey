@@ -10,7 +10,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'serial', 'correct_answer', 'url', )
+    list_display = ('name', 'points' , 'correct_answer', 'url', 'serial')
 
 
 class BonusQuestionAdmin(admin.ModelAdmin):
