@@ -18,16 +18,29 @@
     <div class="container">
         <div class="container col-lg-6">
             {% for question in questions %}
-                <a href="{% url 'questions' question.url %}" style="text-decoration: none">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{ question.name }}</h3>
+                {% if request.user in question.solved_by.all %}
+                    <a href="{% url 'questions' question.url %}" style="text-decoration: none">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ question.name }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>{{ question.desc }}</p>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <p>{{ question.desc }}</p>
+                    </a>
+                {% else %}
+                    <a href="{% url 'questions' question.url %}" style="text-decoration: none">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ question.name }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p>{{ question.desc }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -35,7 +48,7 @@
 
         <div class="container col-lg-6">
             {% for question in bonus %}
-                {% if request.user in question.solved_by %}
+                {% if request.user in question.solved_by.all %}
                     <a href="{% url 'bonus-questions' question.url %}" style="text-decoration: none">
                         <div class="panel panel-success">
                             <div class="panel-heading">
@@ -48,7 +61,7 @@
                     </a>
                 {% else %}
                     <a href="{% url 'bonus-questions' question.url %}" style="text-decoration: none">
-                        <div class="panel panel-success">
+                        <div class="panel panel-primary">
                             <div class="panel-heading">
                                 <h3 class="panel-title">{{ question.name }}</h3>
                             </div>
